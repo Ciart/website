@@ -16,13 +16,13 @@ const { title, isDarkMode } = Astro.props;
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title ? `${title} - Ciart` : 'Ciart'}</title>
   </head>
-  <body class="font-pixel flex flex-col items-center bg-ciart w-full min-h-[calc(100svh+6rem)]">
+  <body class="font-pixel flex flex-col items-center bg-ciart w-full min-h-[calc(100lvh+6rem)]">
     <nav class="max-lg:container lg:w-5xl mx-auto absolute z-50">
       <Header isDarkMode={isDarkMode} />
     </nav>
@@ -33,7 +33,7 @@ const { title, isDarkMode } = Astro.props;
         <slot />
       </main>
     </div>
-    <footer class="h-24"></footer>
+    <footer class="h-24 w-full"><div class="max-lg:container lg:w-5xl mx-auto px-4 py-8 text-white">Footer</div></footer>
   </body>
 </html>
 
@@ -52,7 +52,7 @@ const { title, isDarkMode } = Astro.props;
     if (main && footer) {
       const footerRect = footer.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
+
       if (footerRect.top <= windowHeight) {
         const progress = windowHeight - footerRect.top;
         main.style.borderRadius = `calc(${progress / 96 * 32}px * var(--brm))`;

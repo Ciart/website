@@ -13,6 +13,7 @@ export const collections = {
       tagsUrl: "../tags",
       wikilinkFields: ["relateds"],
       removeH1: true,
+      pattern: ["*.md", "!(books)/**/*.md"],
     }),
     schema: ({ image }) =>
       ObsidianDocumentSchema.extend({
