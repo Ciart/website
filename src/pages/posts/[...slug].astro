@@ -26,13 +26,15 @@ const tags = post.data.tags ?? [];
 ---
 
 <BaseLayout title={post.data.title}>
-  <div class="flex items-end mb-6 justify-between">
+  <div class="mb-6 flex items-end justify-between">
     <h1 class="title">{post.data.title}</h1>
-    <div class="flex flex-col items-end text-sm ml-2 py-1">
+    <div class="ml-2 flex flex-col items-end py-1 text-sm">
       <div class="flex gap-1">
-        {tags.map((tag) => (
-          <a href={`/tags/${tag}`} class="text-blue-400">{`#${tag}`}</a>
-        ))}
+        {
+          tags.map((tag) => (
+            <a href={`/tags/${tag}`} class="text-blue-400">{`#${tag}`}</a>
+          ))
+        }
       </div>
       <p>{getPostDateText(post)}</p>
     </div>

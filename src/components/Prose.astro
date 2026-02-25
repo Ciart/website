@@ -1,11 +1,14 @@
 ---
-const aStyles = 'prose-a:relative prose-a:inline-block prose-a:no-underline prose-a:hover:underline prose-a:before:absolute prose-a:before:inset-0 prose-a:hover:before:-inset-x-1 prose-a:before:rounded-md prose-a:hover:before:bg-ciart/20 prose-a:before:transition-all'
+const aStyles =
+  'prose-a:relative prose-a:inline-block prose-a:no-underline prose-a:hover:underline prose-a:before:absolute prose-a:before:inset-0 prose-a:hover:before:-inset-x-1 prose-a:before:rounded-md prose-a:hover:before:bg-ciart/20 prose-a:before:transition-all';
 ---
 
 <!-- TODO: dark:prose-invert -->
 <div
-  class:list={["w-full max-w-full prose prose-default prose-p:text-[15px] prose-img:rounded-xl prose-code:text-base prose-code:font-normal", aStyles]}
+  class:list={[
+    'prose w-full max-w-full prose-default prose-p:text-[15px] prose-code:text-base prose-code:font-normal prose-img:rounded-xl',
+    aStyles,
+  ]}
 >
   <slot />
 </div>
-

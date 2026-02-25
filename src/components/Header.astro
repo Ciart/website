@@ -1,23 +1,19 @@
 ---
 type Props = {
-    isDarkMode?: boolean;
-}
+  isDarkMode?: boolean;
+};
 
 const { isDarkMode } = Astro.props;
 ---
 
 <div
-    class="flex justify-between items-center max-lg:container lg:w-5xl mx-auto px-4 h-header-height"
+  class="mx-auto flex h-header-height items-center justify-between px-4 max-lg:container lg:w-5xl"
 >
-    <a class="flex justify-center items-center" href="/">
-        <img
-            src="/images/logo-pixel.png"
-            alt="Ciart"
-            class="w-8 h-8 pixelated"
-        />
-    </a>
-    <div class:list={["flex items-center text-sm", isDarkMode && "text-white"]}>
-        <a class="flex px-2" href="/blog">blog</a>
-        <a class="flex px-2" href="/about">about</a>
-    </div>
+  <a class="flex items-center justify-center" href="/">
+    <img src="/images/logo-pixel.png" alt="Ciart" class="h-8 w-8 pixelated" />
+  </a>
+  <div class:list={['flex items-center text-sm', isDarkMode && 'text-white']}>
+    <a class="flex px-2" href="/blog">blog</a>
+    <a class="flex px-2" href="/about">about</a>
+  </div>
 </div>

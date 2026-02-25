@@ -5,9 +5,9 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 
 type Props = {
-    title?: string;
-    isDarkMode?: boolean;
-}
+  title?: string;
+  isDarkMode?: boolean;
+};
 
 const { title, isDarkMode } = Astro.props;
 ---
@@ -16,24 +16,33 @@ const { title, isDarkMode } = Astro.props;
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title ? `${title} - Ciart` : 'Ciart'}</title>
   </head>
-  <body class="font-pixel flex flex-col items-center bg-ciart w-full min-h-[calc(100lvh+6rem)]">
-    <nav class="max-lg:container lg:w-5xl mx-auto absolute z-50">
+  <body
+    class="flex min-h-[calc(100lvh+6rem)] w-full flex-col items-center bg-ciart font-pixel"
+  >
+    <nav class="absolute z-50 mx-auto max-lg:container lg:w-5xl">
       <Header isDarkMode={isDarkMode} />
     </nav>
-    <div id="main-background" class="bg-white w-full flex-1 corner-smooth">
+    <div id="main-background" class="w-full flex-1 bg-white corner-smooth">
       <main
-        class="mt-header-height max-lg:container lg:w-5xl mx-auto px-4 text-black/85 w-full"
+        class="mx-auto mt-header-height w-full px-4 text-black/85 max-lg:container lg:w-5xl"
       >
         <slot />
       </main>
     </div>
-    <footer class="h-24 w-full"><div class="max-lg:container lg:w-5xl mx-auto px-4 py-8 text-white">Footer</div></footer>
+    <footer class="h-24 w-full">
+      <div class="mx-auto px-4 py-8 text-white max-lg:container lg:w-5xl">
+        Footer
+      </div>
+    </footer>
   </body>
 </html>
 
@@ -55,7 +64,7 @@ const { title, isDarkMode } = Astro.props;
 
       if (footerRect.top <= windowHeight) {
         const progress = windowHeight - footerRect.top;
-        main.style.borderRadius = `calc(${progress / 96 * 32}px * var(--brm))`;
+        main.style.borderRadius = `calc(${(progress / 96) * 32}px * var(--brm))`;
       } else {
         main.style.borderRadius = '0px';
       }

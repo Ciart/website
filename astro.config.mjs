@@ -26,10 +26,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [expressiveCode({
-    styleOverrides: {
+  integrations: [
+    expressiveCode({
+      styleOverrides: {
         codeFontFamily: 'GalmuriMono9, monospace',
         codeFontSize: '15px',
       },
-  }), react()],
+    }),
+    react(),
+  ],
 });
