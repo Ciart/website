@@ -25,24 +25,26 @@ const { title, isDarkMode } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title ? `${title} - Ciart` : 'Ciart'}</title>
   </head>
-  <body
-    class="flex min-h-[calc(100lvh+6rem)] w-full flex-col items-center bg-ciart font-pixel"
-  >
-    <nav class="absolute z-50 mx-auto max-lg:container lg:w-5xl">
-      <Header isDarkMode={isDarkMode} />
-    </nav>
-    <div id="main-background" class="w-full flex-1 bg-white corner-smooth">
-      <main
-        class="mx-auto mt-header-height w-full px-4 text-black/85 max-lg:container lg:w-5xl"
-      >
-        <slot />
-      </main>
-    </div>
-    <footer class="h-24 w-full">
-      <div class="mx-auto px-4 py-8 text-white max-lg:container lg:w-5xl">
-        Footer
+  <body class="bg-white font-pixel">
+    <div
+      class="items-cente flex min-h-[calc(100lvh+6rem)] w-full flex-col bg-ciart"
+    >
+      <nav class="absolute z-50 mx-auto max-lg:container lg:w-5xl">
+        <Header isDarkMode={isDarkMode} />
+      </nav>
+      <div id="main-background" class="w-full flex-1 bg-white corner-smooth">
+        <main
+          class="mx-auto mt-header-height w-full px-4 text-black/85 max-lg:container lg:w-5xl"
+        >
+          <slot />
+        </main>
       </div>
-    </footer>
+      <footer class="h-24 w-full">
+        <div class="mx-auto px-4 py-8 text-white max-lg:container lg:w-5xl">
+          Footer
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
 
@@ -54,7 +56,7 @@ const { title, isDarkMode } = Astro.props;
 </style>
 
 <script>
-  const updateBorderRadius = () => {
+  const update = () => {
     const main = document.querySelector<HTMLDivElement>('#main-background');
     const footer = document.querySelector<HTMLElement>('footer');
 
@@ -69,8 +71,15 @@ const { title, isDarkMode } = Astro.props;
         main.style.borderRadius = '0px';
       }
     }
+
+    const atBottom =
+      window.scrollY +
+        window.innerHeight +
+        (footer?.getBoundingClientRect().height ?? 0) >=
+      document.documentElement.scrollHeight;
+    document.body.style.backgroundColor = atBottom ? 'var(--color-ciart)' : '';
   };
 
-  updateBorderRadius();
-  window.addEventListener('scroll', updateBorderRadius);
+  update();
+  window.addEventListener('scroll', update);
 </script>

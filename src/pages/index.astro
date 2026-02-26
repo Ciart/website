@@ -3,7 +3,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
 <BaseLayout>
-  <main-canvas class="absolute inset-0 h-full w-full overflow-hidden"
+  <main-canvas
+    class="pointer-events-none absolute inset-0 h-full w-full overflow-hidden"
   ></main-canvas>
 </BaseLayout>
 
@@ -20,7 +21,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
       await this.app.init({
         background: '#ffffff',
-        backgroundAlpha: 0,
+        backgroundAlpha: 1,
         width: this.clientWidth,
         height: this.clientHeight,
         resolution: window.devicePixelRatio || 1,
