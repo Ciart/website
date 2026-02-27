@@ -26,47 +26,22 @@ const tags = post.data.tags ?? [];
 ---
 
 <BaseLayout title={post.data.title}>
-  <div class="mb-6 flex items-end justify-between">
-    <h1 class="title">{post.data.title}</h1>
-    <div class="ml-2 flex flex-col items-end py-1 text-sm">
-      <div class="flex gap-1">
-        {
-          tags.map((tag) => (
-            <a href={`/tags/${tag}`} class="text-blue-400">{`#${tag}`}</a>
-          ))
-        }
+  <div class="pb-20">
+    <div class="mb-6 flex items-end justify-between">
+      <h1 class="text-3xl font-bold">{post.data.title}</h1>
+      <div class="ml-2 flex flex-col items-end py-1 text-sm">
+        <div class="flex gap-1">
+          {
+            tags.map((tag) => (
+              <a href={`/tags/${tag}`} class="text-blue-400">{`#${tag}`}</a>
+            ))
+          }
+        </div>
+        <p>{getPostDateText(post)}</p>
       </div>
-      <p>{getPostDateText(post)}</p>
     </div>
+    <Prose>
+      <Content />
+    </Prose>
   </div>
-  <Prose>
-    <Content />
-  </Prose>
 </BaseLayout>
-
-<style>
-  /* .title {
-    translate: 0px -4px;
-    paint-order: stroke;
-    position: relative;
-    font-weight: 400;
-    font-size: 30px;
-    color: #ffffff;
-    -webkit-text-stroke: calc(6px) #000000;
-  }
-
-  .title::before {
-    content: attr(data-title);
-    translate: 0px 4px;
-    z-index: -10;
-    paint-order: stroke;
-    position: absolute;
-    color: #000000;
-    -webkit-text-stroke: calc(6px) #000000;
-  } */
-
-  .title {
-    font-weight: bold;
-    font-size: 30px;
-  }
-</style>

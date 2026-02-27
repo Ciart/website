@@ -1,4 +1,6 @@
 ---
+import Container from './Container.astro';
+
 type Props = {
   isDarkMode?: boolean;
 };
@@ -6,9 +8,7 @@ type Props = {
 const { isDarkMode } = Astro.props;
 ---
 
-<div
-  class="mx-auto flex h-header-height items-center justify-between px-4 max-lg:container lg:w-5xl"
->
+<Container class="flex h-header-height items-center justify-between">
   <a class="flex items-center justify-center" href="/">
     <img src="/images/logo-pixel.png" alt="Ciart" class="h-8 w-8 pixelated" />
   </a>
@@ -16,4 +16,4 @@ const { isDarkMode } = Astro.props;
     <a class="flex px-2" href="/blog">blog</a>
     <a class="flex px-2" href="/about">about</a>
   </div>
-</div>
+</Container>
