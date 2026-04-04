@@ -1,43 +1,52 @@
 ---
 import { getCollection } from 'astro:content';
+import { remark } from 'remark';
+import strip from 'strip-markdown';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getPostDateText } from '../helpers/date';
 
 const posts = await getCollection('blog');
-const sortedPosts = posts
-  .filter((post) => post.data.published)
-  .sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf())
-  .map((post) => ({
-    ...post,
-    body:
-      post.body &&
-      post.body.substring(0, 100) + (post.body.length > 200 ? '...' : ''),
-  }));
+const sortedPosts = await Promise.all(
+  posts
+    .filter((post) => post.data.published)
+    .sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf())
+    .map(async (post) => {
+      if (!post.body) {
+        return {
+          ...post,
+          description: '',
+        };
+      }
+
+      const body = (
+        await remark()
+          .use(strip, { remove: ['image', 'heading'] })
+          .process(post.body)
+      ).toString();
+      const description =
+        body.substring(0, 150) + (body.length > 150 ? '...' : '');
+
+      return {
+        ...post,
+        description,
+      };
+    }),
+);
 ---
 
 <BaseLayout>
   <div class="flex flex-col gap-4">
-    <div>
-      <a
-        class="block w-50 rounded-md transition-all hover:ring-8 hover:ring-black/5 active:ring-4 active:ring-black/10"
-        href="/"
-      >
-        <img
-          class="size full rounded-md"
-          src="https://placehold.co/200@2x.png"
-          alt=""
-        />
-      </a>
-    </div>
     <div class="flex flex-col gap-4">
       {
         sortedPosts.map((post) => (
           <a href={post.data.permalink}>
-            <div class="flex items-baseline justify-between">
+            <div class="mb-1 flex items-baseline justify-between">
               <h2 class="font-bold">{post.data.title}</h2>
               <p class="text-sm">{getPostDateText(post)}</p>
             </div>
-            <p class="text-[15px]">{post.body}</p>
+            <p class="overflow-hidden text-[15px] text-ellipsis whitespace-nowrap">
+              {post.description}
+            </p>
           </a>
         ))
       }
