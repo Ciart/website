@@ -63,7 +63,7 @@ const { title, isDarkMode } = Astro.props;
       const windowHeight = window.innerHeight;
 
       if (footerRect.top <= windowHeight) {
-        const progress = windowHeight - footerRect.top;
+        const progress = Math.min(windowHeight - footerRect.top, 96);
         main.style.borderRadius = `calc(${(progress / 96) * 32}px * var(--brm))`;
       } else {
         main.style.borderRadius = '0px';
@@ -71,6 +71,11 @@ const { title, isDarkMode } = Astro.props;
     }
   };
 
-  update();
+  const safeUpdate = () => requestAnimationFrame(update);
+
+  safeUpdate();
   window.addEventListener('scroll', update);
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) safeUpdate();
+  });
 </script>
