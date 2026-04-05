@@ -63,7 +63,7 @@ const { title, isDarkMode } = Astro.props;
       const windowHeight = window.innerHeight;
 
       if (footerRect.top <= windowHeight) {
-        const progress = Math.min(windowHeight - footerRect.top, 96);
+        const progress = windowHeight - footerRect.top;
         main.style.borderRadius = `calc(${(progress / 96) * 32}px * var(--brm))`;
       } else {
         main.style.borderRadius = '0px';

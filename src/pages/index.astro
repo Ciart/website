@@ -20,8 +20,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
       this.app = new Application();
 
       await this.app.init({
-        background: '#ffffff',
-        backgroundAlpha: 1,
+        background: 'transparent',
+        backgroundAlpha: 0,
         width: this.clientWidth,
         height: this.clientHeight,
         resolution: window.devicePixelRatio || 1,
