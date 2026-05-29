@@ -1,3 +1,4 @@
 [submodule "src/blog"]
 	path = src/blog
 	url = ../ciart-kr-blog
+	branch = main

@@ -1,0 +1,62 @@
+name: Update blog submodule
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [update-blog-submodule]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-blog-submodule
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          ref: main
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Configure Git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Update blog submodule
+        id: update
+        env:
+          SUBMODULE_PATH: src/blog
+        run: |
+          set -euo pipefail
+
+          git submodule sync --recursive
+          git submodule update --init --recursive --remote "$SUBMODULE_PATH"
+
+          if git diff --quiet -- "$SUBMODULE_PATH"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No updates found for $SUBMODULE_PATH."
+            exit 0
+          fi
+
+          new_sha="$(git -C "$SUBMODULE_PATH" rev-parse --short HEAD)"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "new_sha=$new_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push submodule pointer
+        if: steps.update.outputs.changed == 'true'
+        env:
+          SUBMODULE_PATH: src/blog
+          NEW_SHA: ${{ steps.update.outputs.new_sha }}
+        run: |
+          set -euo pipefail
+
+          git add "$SUBMODULE_PATH"
+          git commit -m "chore: update blog submodule to ${NEW_SHA}"
+          git push origin main
