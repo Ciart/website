@@ -11,12 +11,14 @@ interface Props {
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
 
-  return posts.map((post) => {
-    return {
-      params: { slug: post.id },
-      props: { post },
-    };
-  });
+  return posts
+    .map((post) => {
+      return {
+        params: { slug: post.id },
+        props: { post },
+      };
+    })
+    .filter((post) => post.props.post.data.published);
 }
 
 const { post } = Astro.props;
@@ -27,18 +29,18 @@ const tags = post.data.tags ?? [];
 
 <BaseLayout title={post.data.title}>
   <div class="pb-20">
-    <div class="mb-6 flex items-end justify-between">
-      <h1 class="text-3xl font-bold">{post.data.title}</h1>
-      <div class="ml-2 flex flex-col items-end py-1 text-sm">
-        <div class="flex gap-1">
-          {
-            tags.map((tag) => (
-              <a href={`/tags/${tag}`} class="text-blue-400">{`#${tag}`}</a>
-            ))
-          }
-        </div>
-        <p>{getPostDateText(post)}</p>
+    <div class="mb-6 flex flex-col items-center">
+      <div class="flex gap-1 font-pixel text-xs">
+        {
+          tags.map((tag) => (
+            <a href={`/tags/${tag}`} class="text-blue-400">{`#${tag}`}</a>
+          ))
+        }
       </div>
+      <h1 class="mb-2 font-serif text-3xl font-bold tracking-tight">
+        {post.data.title}
+      </h1>
+      <p class="font-pixel text-xs">{getPostDateText(post)}</p>
     </div>
     <Prose>
       <Content />

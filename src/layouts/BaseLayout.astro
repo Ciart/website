@@ -28,13 +28,13 @@ const { title, isDarkMode } = Astro.props;
     <title>{title ? `${title} - Ciart` : 'Ciart'}</title>
   </head>
   <body
-    class="flex min-h-[calc(100lvh+6rem)] w-full flex-col items-center bg-ciart font-pixel"
+    class="flex min-h-[calc(100lvh+6rem)] w-full flex-col items-center bg-ciart font-sans text-black/80"
   >
     <nav class="absolute z-50 w-full">
       <Header isDarkMode={isDarkMode} />
     </nav>
     <div id="main-background" class="w-full flex-1 bg-white corner-smooth">
-      <main class="mt-header-height w-full text-black/85">
+      <main class="mt-header-height w-full">
         <Container>
           <slot />
         </Container>

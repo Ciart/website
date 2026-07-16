@@ -1,8 +1,51 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff2);
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2);
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2);
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2);
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MaruBuri';
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff2);
+  font-weight: 700;
+  font-display: swap;
+}
+
 @theme {
   --font-pixel: Galmuri9, sans-serif;
+  --font-sans:
+    'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo',
+    'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', sans-serif;
+  --font-serif: MaruBuri, serif;
   --default-mono-font-family: GalmuriMono9, monospace;
 
   --color-ciart: #619a42;
@@ -15,11 +58,11 @@
 }
 
 @utility prose-default {
-  --tw-prose-body: --alpha(var(--color-black) / 85%);
-  --tw-prose-headings: --alpha(var(--color-black) / 85%);
+  --tw-prose-body: --alpha(var(--color-black) / 80%);
+  --tw-prose-headings: --alpha(var(--color-black) / 80%);
   --tw-prose-lead: var(--color-gray-600);
   --tw-prose-links: var(--color-ciart);
-  --tw-prose-bold: --alpha(var(--color-black) / 85%);
+  --tw-prose-bold: --alpha(var(--color-black) / 80%);
   --tw-prose-counters: var(--color-gray-500);
   --tw-prose-bullets: --alpha(var(--color-black) / 50%);
   --tw-prose-hr: var(--color-gray-200);
@@ -55,6 +98,7 @@
 
 :root {
   --brm: 1;
+  font-synthesis: none;
 }
 
 @supports (corner-shape: superellipse(var(--brm))) {

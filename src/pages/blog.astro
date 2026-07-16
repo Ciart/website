@@ -41,10 +41,12 @@ const sortedPosts = await Promise.all(
         sortedPosts.map((post) => (
           <a href={post.data.permalink}>
             <div class="mb-1 flex items-baseline justify-between">
-              <h2 class="font-bold">{post.data.title}</h2>
-              <p class="text-sm">{getPostDateText(post)}</p>
+              <h2 class="font-serif font-bold">{post.data.title}</h2>
+              <p class="font-pixel text-xs text-black/60">
+                {getPostDateText(post)}
+              </p>
             </div>
-            <p class="overflow-hidden text-[15px] text-ellipsis whitespace-nowrap">
+            <p class="overflow-hidden text-sm text-ellipsis whitespace-nowrap text-black/40">
               {post.description}
             </p>
           </a>

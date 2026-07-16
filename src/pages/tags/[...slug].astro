@@ -14,8 +14,8 @@ export async function getStaticPaths() {
   ];
 
   return uniqueTags.map((tag) => {
-    const filteredPosts = allPosts.filter((post: any) =>
-      post.data.tags?.includes(tag),
+    const filteredPosts = allPosts.filter(
+      (post: any) => post.data.tags?.includes(tag) && post.data.published,
     );
     return {
       params: { slug: tag },
