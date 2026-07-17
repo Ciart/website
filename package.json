@@ -1,5 +1,5 @@
 {
-  "name": "ciart-kr",
+  "name": "@ciart/website",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -39,7 +39,8 @@
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.7.2"
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "wrangler": "^4.112.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
