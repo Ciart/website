@@ -7,9 +7,12 @@ import expressiveCode from 'astro-expressive-code';
 
 import react from '@astrojs/react';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ciart.kr',
+  site: 'https://ciart.com',
+
   // markdown: {
   //   remarkPlugins: [
   //     () => {
@@ -26,6 +29,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
   integrations: [
     expressiveCode({
       styleOverrides: {
@@ -35,4 +39,6 @@ export default defineConfig({
     }),
     react(),
   ],
+
+  adapter: cloudflare(),
 });
